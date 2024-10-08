@@ -3,12 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "convex": "convex dev",
     "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "convex": "^1.16.4",
     "flowbite-react": "^0.10.2",
     "next": "14.2.14",
     "react": "^18",
