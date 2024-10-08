@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import { ThemeModeScript } from "flowbite-react";
+import { ConvexClientProvider } from "@/context/ConvexClientProvider";
 import "./globals.css";
 
 const roboto = Roboto({
@@ -35,7 +36,7 @@ export default function RootLayout({
       <body
         className={`${roboto.className} antialiased dark:bg-gray-700 bg-white`}
       >
-        {children}
+        <ConvexClientProvider>{children}</ConvexClientProvider>
       </body>
     </html>
   );

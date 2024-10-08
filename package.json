@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "convex": "convex dev",
-    "dev": "next dev --turbo",
+    "convex": "infisical run --env=dev -- convex dev",
+    "dev": "infisical run --env=dev -- next dev --turbo",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
