@@ -33,9 +33,7 @@ export default function RootLayout({
       <head>
         <ThemeModeScript />
       </head>
-      <body
-        className={`${roboto.className} antialiased dark:bg-gray-700 bg-white`}
-      >
+      <body className={`${roboto.className} antialiased text-gray-900`}>
         <ConvexClientProvider>{children}</ConvexClientProvider>
       </body>
     </html>
