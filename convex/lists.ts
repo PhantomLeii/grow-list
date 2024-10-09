@@ -30,16 +30,8 @@ export const getList = query({
 
     const list = await ctx.db
       .query("lists")
-      .filter((q) => q.eq(q.field("creator"), id))
+      .filter((q) => q.eq(q.field("_id"), id))
       .first();
-
-    if (!list) {
-      return 404;
-    }
-
-    if (list.creator !== userID) {
-      return 403;
-    }
 
     return list;
   },
