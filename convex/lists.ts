@@ -56,7 +56,7 @@ export const createList = mutation({
     const userID = await getUserID(ctx);
 
     await ctx.db.insert("lists", {
-      creator: userID,
+      creator: userID || "",
       name: name,
       isPrivate: isPrivate,
       description: description,
