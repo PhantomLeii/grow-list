@@ -15,13 +15,17 @@ export default function Home() {
       </SignedOut>
 
       <SignedIn>
-        <div className="container h-screen w-full flex flex-col justify-start items-start  max-w-4xl py-8">
+        <div className="container h-[calc(100vh-80px)] w-full flex flex-col justify-start items-start  max-w-4xl py-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6 md:gap-2 w-full"> 
             <h1 className="text-3xl md:text-start font-extrabold w-full">
               Welcome back,<br />
               <span className="text-blue-800">{user?.firstName}</span>!
             </h1>
             <ModalForm />
+          </div>
+          <div className='w-full flex flex-col mt-8 justify-start items-start gap-2'>
+            {}
+            <p className='text-lg text-neutral-400 text-center w-full'>You have no lists yet. Create a new list to get started.</p>
           </div>
         </div>
       </SignedIn>
@@ -31,7 +35,7 @@ export default function Home() {
 
 export function OnBoarding() {
   return (
-    <div className="container h-screen w-full flex flex-col justify-center items-center max-w-4xl">
+    <div className="container h-[calc(100vh-80px)] w-full flex flex-col justify-center items-center max-w-4xl">
       <p className="w-full text-lg md:text-center tracking-wide font-light uppercase mb-2">
         Make shopping feel like magic again!
       </p>
