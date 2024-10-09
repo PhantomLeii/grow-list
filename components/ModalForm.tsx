@@ -49,7 +49,10 @@ export default function ModalForm() {
 
   return (
     <>
-      <Button as="span" onClick={() => setOpenModal(!openModal)} color="dark">
+      <Button
+        as="span"
+        onClick={() => setOpenModal(!openModal)} color="dark"
+      >
         New List
       </Button>
 
