@@ -1,11 +1,16 @@
-'use client';
+"use client";
 
-import ModalForm from "@/components/ModalForm";
+import ListModalForm from "@/components/ListModalForm";
 import Button from "@/components/ui/Button";
 import ItemCard from "@/components/ui/Card";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
+import { api } from "@/convex/_generated/api";
+import { useQuery } from "convex/react";
+import { Spinner } from "flowbite-react";
 
 export default function Home() {
+  const lists = useQuery(api.lists.getAllLists);
+
   return (
     <>
       <SignedOut>
@@ -14,21 +19,31 @@ export default function Home() {
 
       <SignedIn>
         <div className="container h-[calc(100vh-80px)] w-full flex flex-col justify-start items-start  max-w-4xl py-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6 md:gap-2 w-full"> 
-            <ModalForm />
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6 md:gap-2 w-full">
+            <ListModalForm />
           </div>
-          <div className='w-full flex flex-col mt-8 justify-start items-start gap-2'>
-            <p className='text-lg text-neutral-400 text-center md:text-start w-full'>You have no lists yet. Create a new list to get started.</p>
-            <ItemCard
-              name='Braai Essentials'
-              description='Get ready for a weekend braai with these essentials.' href='/list/1'
-              isPrivate={true}
-            />
-            <ItemCard
-              name='Braai Essentials'
-              description='Get ready for a weekend braai with these essentials.' href='/list/1'
-              isPrivate={false}
-            />
+          <div className="w-full flex flex-col mt-8 justify-start items-start gap-2">
+            {lists === undefined && (
+              <div className="w-full h-full grid place-items-center">
+                <Spinner color="blue" />
+              </div>
+            )}
+
+            {lists?.length === 0 && (
+              <p className="text-lg text-neutral-400 text-center md:text-start w-full">
+                You have no lists yet. Create a new list.
+              </p>
+            )}
+
+            {lists?.map((list) => (
+              <ItemCard
+                key={list._id}
+                name={list.name}
+                description={list.description || ''}
+                href={`/lists/${list._id}`}
+                isPrivate={list.isPrivate}
+              />
+            ))}
           </div>
         </div>
       </SignedIn>
@@ -55,5 +70,5 @@ export function OnBoarding() {
         </Button>
       </div>
     </div>
-  )
+  );
 }
