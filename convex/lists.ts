@@ -11,6 +11,7 @@ export const getAllLists = query({
     // Filter all lists by userID & where users is among participants
     const lists = await ctx.db
       .query("lists")
+      // TODO: Filter by participants
       .filter((q) => q.eq(q.field("creator"), userID))
       .order("desc")
       .collect();

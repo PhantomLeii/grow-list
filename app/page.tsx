@@ -1,6 +1,6 @@
 "use client";
 
-import ModalForm from "@/components/ModalForm";
+import ListModalForm from "@/components/ListModalForm";
 import Button from "@/components/ui/Button";
 import ItemCard from "@/components/ui/Card";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
@@ -20,7 +20,7 @@ export default function Home() {
       <SignedIn>
         <div className="container h-[calc(100vh-80px)] w-full flex flex-col justify-start items-start  max-w-4xl py-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6 md:gap-2 w-full">
-            <ModalForm />
+            <ListModalForm />
           </div>
           <div className="w-full flex flex-col mt-8 justify-start items-start gap-2">
             {lists === undefined && (

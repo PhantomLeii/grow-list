@@ -18,7 +18,7 @@ const ModalFormTheme: CustomFlowbiteTheme["modal"] = {
   },
 };
 
-export default function ModalForm() {
+export default function ListModalForm() {
   const [openModal, setOpenModal] = useState(false);
   const [error, setError] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
