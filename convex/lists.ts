@@ -12,6 +12,7 @@ export const getAllLists = query({
     const lists = await ctx.db
       .query("lists")
       .filter((q) => q.eq(q.field("creator"), userID))
+      .order("desc")
       .collect();
 
     return lists;

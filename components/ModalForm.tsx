@@ -20,8 +20,9 @@ const ModalFormTheme: CustomFlowbiteTheme["modal"] = {
 
 export default function ModalForm() {
   const [openModal, setOpenModal] = useState(false);
-  const createList = useMutation(api.lists.createList);
   const [error, setError] = useState("");
+  const [isProcessing, setIsProcessing] = useState(false);
+  const createList = useMutation(api.lists.createList);
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -29,6 +30,7 @@ export default function ModalForm() {
   });
 
   async function handleSubmit() {
+    setIsProcessing(true);
     const res = await createList({ ...formData });
 
     if (res !== 201) {
@@ -41,6 +43,7 @@ export default function ModalForm() {
       isPrivate: false,
     });
 
+    setIsProcessing(false);
     setOpenModal(false);
   }
 
@@ -94,7 +97,7 @@ export default function ModalForm() {
                 onChange={(e) =>
                   setFormData({ ...formData, description: e.target.value })
                 }
-                placeholder="All the essentials for our braii this weekend"
+                placeholder="All the essentials for our braai this weekend"
                 required
               />
             </div>
@@ -113,7 +116,13 @@ export default function ModalForm() {
             </div>
 
             <div className="w-full">
-              <Button onClick={() => handleSubmit()}>Create List</Button>
+              <Button
+                onClick={() => handleSubmit()}
+                isProcessing={isProcessing}
+                disabled={isProcessing}
+              >
+                Create List
+              </Button>
             </div>
           </div>
         </Modal.Body>
