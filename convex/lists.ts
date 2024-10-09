@@ -20,6 +20,31 @@ export const getAllLists = query({
   },
 });
 
+export const getList = query({
+  args: {
+    id: v.string(),
+  },
+
+  handler: async (ctx, { id }) => {
+    const userID = await getUserID(ctx);
+
+    const list = await ctx.db
+      .query("lists")
+      .filter((q) => q.eq(q.field("creator"), id))
+      .first();
+
+    if (!list) {
+      return 404;
+    }
+
+    if (list.creator !== userID) {
+      return 403;
+    }
+
+    return list;
+  },
+});
+
 export const createList = mutation({
   args: {
     name: v.string(),
