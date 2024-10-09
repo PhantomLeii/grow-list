@@ -46,7 +46,7 @@ export default function Button({
       color={color}
       size={size}
       className={
-        "flex justify-center items-center gap-2 w-full md:w-auto cursor-pointer " +
+        "flex items-center gap-2 w-full md:w-auto cursor-pointer " +
         className
       }
       aria-disabled={disabled}

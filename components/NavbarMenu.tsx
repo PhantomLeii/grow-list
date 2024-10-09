@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { SignedIn, SignedOut, useUser } from "@clerk/nextjs";
 import { SignOutButton } from "@clerk/nextjs";
 import Button from "./ui/Button";
+import Link from "next/link";
 
 export default function NavbarMenu() {
   const pathname = usePathname();
@@ -33,12 +34,12 @@ export default function NavbarMenu() {
                 {user?.emailAddresses[0].emailAddress}
               </span>
             </Dropdown.Header>
-            <Dropdown.Item>Dashboard</Dropdown.Item>
-            <Dropdown.Item>Settings</Dropdown.Item>
-            <Dropdown.Item>Earnings</Dropdown.Item>
+            <Dropdown.Item><Link href="/">Dashboard</Link></Dropdown.Item>
+            <Dropdown.Item><Link href="/lists">Earnings</Link></Dropdown.Item>
+            <Dropdown.Item><Link href="/settings">Settings</Link></Dropdown.Item>
             <Dropdown.Divider />
             <SignOutButton>
-              <Dropdown.Item className="hover:font-extrabold hover:text-red-700">
+              <Dropdown.Item className="hover:font-extrabold hover:text-red-700 dark:text-red-700">
                 Sign out
               </Dropdown.Item>
             </SignOutButton>
