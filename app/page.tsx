@@ -2,12 +2,10 @@
 
 import ModalForm from "@/components/ModalForm";
 import Button from "@/components/ui/Button";
+import ItemCard from "@/components/ui/Card";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
-import { useUser } from "@clerk/nextjs";
 
 export default function Home() {
-  const { user } = useUser();
-  
   return (
     <>
       <SignedOut>
@@ -17,15 +15,20 @@ export default function Home() {
       <SignedIn>
         <div className="container h-[calc(100vh-80px)] w-full flex flex-col justify-start items-start  max-w-4xl py-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6 md:gap-2 w-full"> 
-            <h1 className="text-3xl md:text-start font-extrabold w-full">
-              Welcome back,<br />
-              <span className="text-blue-800">{user?.firstName}</span>!
-            </h1>
             <ModalForm />
           </div>
           <div className='w-full flex flex-col mt-8 justify-start items-start gap-2'>
-            {}
-            <p className='text-lg text-neutral-400 text-center w-full'>You have no lists yet. Create a new list to get started.</p>
+            <p className='text-lg text-neutral-400 text-center md:text-start w-full'>You have no lists yet. Create a new list to get started.</p>
+            <ItemCard
+              name='Braai Essentials'
+              description='Get ready for a weekend braai with these essentials.' href='/list/1'
+              isPrivate={true}
+            />
+            <ItemCard
+              name='Braai Essentials'
+              description='Get ready for a weekend braai with these essentials.' href='/list/1'
+              isPrivate={false}
+            />
           </div>
         </div>
       </SignedIn>

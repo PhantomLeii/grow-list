@@ -13,7 +13,20 @@ const ModalFormTheme: CustomFlowbiteTheme["modal"] = {
 
 export default function ModalForm() {
   const [openModal, setOpenModal] = useState(false);
-  const nameInputRef = useRef<HTMLInputElement>(null);
+  const [formData, setFormData] = useState({
+    name: "",
+    description: "",
+    private: false
+  });
+  
+  function handleSubmit() {
+    console.log(formData);
+    setFormData({
+      name: "",
+      description: "",
+      private: false,
+    })
+  }
 
   return (
     <>
@@ -21,7 +34,7 @@ export default function ModalForm() {
         New List
       </Button>
 
-      <Modal theme={ModalFormTheme} show={openModal} position="center" size="md" popup onClose={() => setOpenModal(false)} initialFocus={nameInputRef}>
+      <Modal theme={ModalFormTheme} show={openModal} position="center" size="md" popup onClose={() => setOpenModal(false)}>
         <Modal.Header />
         <Modal.Body>
           <div className="space-y-6">
@@ -30,18 +43,25 @@ export default function ModalForm() {
               <div className="mb-2 block">
                 <Label htmlFor="name" value="Name" />
               </div>
-              <TextInput id="name" ref={nameInputRef} placeholder="Braai Essentials" required />
+              <TextInput id="name" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} placeholder="Braai Essentials" required />
+            </div>
+
+            <div>
+              <div className="mb-2 block">
+                <Label htmlFor="desription" value="Description" />
+              </div>
+              <TextInput id="description" value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} placeholder="All the essentials for our braii this weekend" required />
             </div>
 
             <div className="flex justify-between">
               <div className="flex items-center gap-2">
                 <Label htmlFor="private">Private</Label>
-                <Checkbox id="private" />
+                <Checkbox id="private" checked={formData.private} onChange={(e) => setFormData({ ...formData, private: e.target.checked })} />
               </div>
             </div>
 
             <div className="w-full">
-              <Button onClick={() => {}}>Create List</Button>
+              <Button onClick={() => handleSubmit()}>Create List</Button>
             </div>
           </div>
         </Modal.Body>
