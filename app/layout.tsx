@@ -34,10 +34,11 @@ export default function RootLayout({
       <head>
         <ThemeModeScript />
       </head>
+
       <body className={`${roboto.className} antialiased text-gray-900`}>
         <ConvexClientProvider>
           <NavbarMenu />
-          <div className="absolute left-0 w-full">{children}</div>
+          <div className="absolute left-0 top-[80px] w-full">{children}</div>
         </ConvexClientProvider>
       </body>
     </html>

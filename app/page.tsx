@@ -1,22 +1,27 @@
+'use client';
+
+import ModalForm from "@/components/ModalForm";
 import Button from "@/components/ui/Button";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
+import { useUser } from "@clerk/nextjs";
 
 export default function Home() {
+  const { user } = useUser();
+  
   return (
     <>
       <SignedOut>
         <OnBoarding />
       </SignedOut>
-      
+
       <SignedIn>
-        <div className="container h-screen w-full flex flex-col justify-center items-center max-w-4xl">
-          <h1 className="text-5xl md:text-center font-extrabold">
-            Welcome back, <span className="text-blue-800">User</span>!
-          </h1>
-          <div className="mt-6 flex flex-col md:flex-row justify-center items-center gap-2 w-full">
-            <Button as="a" size="lg" href="/dashboard" color="dark">
-              Go to Dashboard
-            </Button>
+        <div className="container h-screen w-full flex flex-col justify-start items-start  max-w-4xl py-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6 md:gap-2 w-full"> 
+            <h1 className="text-3xl md:text-start font-extrabold w-full">
+              Welcome back,<br />
+              <span className="text-blue-800">{user?.firstName}</span>!
+            </h1>
+            <ModalForm />
           </div>
         </div>
       </SignedIn>
