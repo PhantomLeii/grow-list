@@ -2,6 +2,10 @@
   "name": "grow-list",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "20.x",
+    "npm": "10.x",
+  },
   "scripts": {
     "convex": "infisical run --env=dev -- convex dev",
     "dev": "infisical run --env=dev -- next dev --turbo",
