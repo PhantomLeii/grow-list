@@ -1,3 +1,4 @@
+import { metadata } from "./../app/layout";
 import { v } from "convex/values";
 import { query, mutation } from "./_generated/server";
 
@@ -27,15 +28,32 @@ export const createItem = mutation({
 
 export const getAllItems = query({
   args: {
-    listID: v.id('lists'),
+    listID: v.id("lists"),
   },
 
   handler: async (ctx, { listID }) => {
-     const items = await ctx.db
-      .query('items')
-      .filter(q => q.eq(q.field('list'), listID))
-      .collect()
-    
+    const items = await ctx.db
+      .query("items")
+      .filter((q) => q.eq(q.field("list"), listID))
+      .collect();
+
     return items;
-  }
-})
+  },
+});
+
+export const removeItem = mutation({
+  args: {
+    id: v.id("items"),
+  },
+
+  handler: async (ctx, { id }) => {
+    try {
+      await ctx.db.delete(id);
+    } catch (err) {
+      console.error(err);
+      return 400;
+    }
+
+    return 204;
+  },
+});

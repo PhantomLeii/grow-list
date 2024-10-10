@@ -44,6 +44,7 @@ export default function List() {
 
         {items?.map((item) => (
           <ItemModal
+            id={item._id}
             key={item._id}
             name={item.name}
             description={item.description}
