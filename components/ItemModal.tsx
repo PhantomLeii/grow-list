@@ -45,6 +45,7 @@ export default function ItemModal({ name, description, id }: ItemModalProps) {
 
     if (res === 400) {
       setError("Couldn't remove item. Try again.");
+      alert(error);
       return;
     }
 
