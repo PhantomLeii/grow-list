@@ -4,7 +4,7 @@ import { Card, Badge } from "flowbite-react";
 
 type ItemCardProps = {
   name: string;
-  description: string;
+  description?: string;
   href?: string;
   isPrivate?: boolean;
 };

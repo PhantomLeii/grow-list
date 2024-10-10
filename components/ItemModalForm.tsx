@@ -11,6 +11,7 @@ import Button from "./ui/Button";
 import { useState } from "react";
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
+import { Id } from "@/convex/_generated/dataModel";
 
 const ModalFormTheme: CustomFlowbiteTheme["modal"] = {
   root: {
@@ -18,23 +19,33 @@ const ModalFormTheme: CustomFlowbiteTheme["modal"] = {
   },
 };
 
-export default function ItemModalList() {
+export default function ItemModalList({ id }: { id: Id<"lists"> }) {
   const [openModal, setOpenModal] = useState(false);
   const [error, setError] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
   const [formData, setFormData] = useState({
-    item: "",
+    name: "",
     description: "",
   });
 
-  function handleSubmit() {
-    console.log(formData);
+  const createItem = useMutation(api.items.createItem);
+
+  async function handleSubmit() {
+    setIsProcessing(true);
+
+    const res = await createItem({ ...formData, listID: id });
+
+    if (res === 400) {
+      setError("Couldn't add item. Try again.");
+      return;
+    }
 
     setFormData({
-      item: "",
+      name: "",
       description: "",
     });
 
+    setIsProcessing(false);
     setOpenModal(false);
   }
 
@@ -69,11 +80,10 @@ export default function ItemModalList() {
               </div>
               <TextInput
                 id="item"
-                value={formData.item}
+                value={formData.name}
                 onChange={(e) =>
-                  setFormData({ ...formData, item: e.target.value })
+                  setFormData({ ...formData, name: e.target.value })
                 }
-                placeholder="Milk"
                 required
               />
             </div>
@@ -88,7 +98,6 @@ export default function ItemModalList() {
                 onChange={(e) =>
                   setFormData({ ...formData, description: e.target.value })
                 }
-                placeholder="Get the douglasdale brand"
                 required
               />
             </div>
