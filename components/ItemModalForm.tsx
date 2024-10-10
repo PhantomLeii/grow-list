@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  Checkbox,
-  CustomFlowbiteTheme,
-  Label,
-  Modal,
-  TextInput,
-} from "flowbite-react";
+import { CustomFlowbiteTheme, Label, Modal, TextInput } from "flowbite-react";
 import Button from "./ui/Button";
 import { useState } from "react";
 import { useMutation } from "convex/react";

@@ -1,14 +1,14 @@
 "use client";
 
 import { Avatar, Dropdown, Navbar } from "flowbite-react";
-import { usePathname } from "next/navigation";
+// import { usePathname } from "next/navigation";
 import { SignedIn, SignedOut, useUser } from "@clerk/nextjs";
 import { SignOutButton } from "@clerk/nextjs";
 import Button from "./ui/Button";
 import Link from "next/link";
 
 export default function NavbarMenu() {
-  const pathname = usePathname();
+  // const pathname = usePathname();
   const { user } = useUser();
 
   return (

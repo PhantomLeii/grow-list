@@ -6,7 +6,6 @@ import { api } from "@/convex/_generated/api";
 import { useQuery } from "convex/react";
 import ItemModalForm from "@/components/ItemModalForm";
 import { Spinner } from "flowbite-react";
-import ItemCard from "@/components/ui/Card";
 import { Id } from "@/convex/_generated/dataModel";
 import ItemModal from "@/components/ItemModal";
 
