@@ -13,7 +13,6 @@ export default defineSchema({
   items: defineTable({
     name: v.string(),
     description: v.string(),
-    isPurchased: v.boolean(),
     list: v.id("lists"),
   }),
 });

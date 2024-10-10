@@ -14,7 +14,6 @@ export const createItem = mutation({
       await ctx.db.insert("items", {
         name,
         description,
-        isPurchased: false,
         list: listID,
       });
     } catch (err) {
