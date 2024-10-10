@@ -1,5 +1,5 @@
 import { v } from "convex/values";
-import { query, mutation } from "./_generated/server";
+import { query, mutation, internalMutation, action } from "./_generated/server";
 import { getUserID } from "./utils";
 
 export const getAllLists = query({
@@ -22,23 +22,16 @@ export const getAllLists = query({
 
 export const getList = query({
   args: {
-    id: v.string(),
+    id: v.id("lists"),
   },
 
   handler: async (ctx, { id }) => {
     const userID = await getUserID(ctx);
 
-    const list = await ctx.db
-      .query("lists")
-      .filter((q) => q.eq(q.field("creator"), id))
-      .first();
+    const list = await ctx.db.get(id);
 
-    if (!list) {
-      return 404;
-    }
-
-    if (list.creator !== userID) {
-      return 403;
+    if (list?.creator !== userID) {
+      return null;
     }
 
     return list;
@@ -55,12 +48,17 @@ export const createList = mutation({
   handler: async (ctx, { name, isPrivate, description }) => {
     const userID = await getUserID(ctx);
 
-    await ctx.db.insert("lists", {
-      creator: userID || "",
-      name: name,
-      isPrivate: isPrivate,
-      description: description,
-    });
+    try {
+      await ctx.db.insert("lists", {
+        creator: userID || "",
+        name: name,
+        isPrivate: isPrivate,
+        description: description,
+      });
+    } catch (err) {
+      console.error(err);
+      return 400;
+    }
 
     return 201;
   },

@@ -26,17 +26,26 @@ export default function NavbarMenu() {
             label={<Avatar alt="User settings" img={user?.imageUrl} rounded />}
           >
             <Dropdown.Header>
-              <span className="block text-sm">
-                {user?.firstName} {user?.lastName}
-              </span>
-              <span className="block text-xs mb-4">@{user?.username}</span>
-              <span className="block truncate text-sm font-medium">
+              {user?.firstName && user.lastName && (
+                <span className="block text-sm">
+                  {user?.firstName} {user?.lastName}
+                </span>
+              )}
+              {user?.username && (
+                <span className="block text-xs">@{user?.username}</span>
+              )}
+              <span className="block truncate text-sm font-medium mt-4">
                 {user?.emailAddresses[0].emailAddress}
               </span>
             </Dropdown.Header>
-            <Dropdown.Item><Link href="/">Dashboard</Link></Dropdown.Item>
-            <Dropdown.Item><Link href="/lists">Earnings</Link></Dropdown.Item>
-            <Dropdown.Item><Link href="/settings">Settings</Link></Dropdown.Item>
+            <Dropdown.Item>
+              <Link href="/">Home</Link>
+            </Dropdown.Item>
+            <Dropdown.Item>
+              <Link href="/settings" aria-disabled={true}>
+                Settings
+              </Link>
+            </Dropdown.Item>
             <Dropdown.Divider />
             <SignOutButton>
               <Dropdown.Item className="hover:font-extrabold hover:text-red-700 dark:text-red-700">
@@ -53,12 +62,12 @@ export default function NavbarMenu() {
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
-        <Navbar.Link href="/" active={pathname === "/"}>
+        {/* <Navbar.Link href="/" active={pathname === "/"}>
           Home
         </Navbar.Link>
         <Navbar.Link href="/about" active={pathname.includes("/about")}>
           About
-        </Navbar.Link>
+        </Navbar.Link> */}
       </Navbar.Collapse>
     </Navbar>
   );

@@ -7,11 +7,12 @@ export default defineSchema({
     name: v.string(),
     description: v.optional(v.string()),
     isPrivate: v.boolean(),
-    items: v.optional(v.array(v.object({
-      itemName: v.string(),
-      itemDescription: v.string(),
-      isPurchased: v.boolean()
-    }))),
-    participants: v.optional(v.array(v.string()))
-  })
-})
+    participants: v.optional(v.array(v.string())),
+  }),
+
+  items: defineTable({
+    name: v.string(),
+    description: v.string(),
+    list: v.id("lists"),
+  }),
+});

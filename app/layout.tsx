@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import { ThemeModeScript } from "flowbite-react";
-import { ConvexClientProvider } from "@/context/ConvexClientProvider";
-import NavbarMenu from "@/components/NavbarMenu";
+import ConvexClientProvider from "../context/ConvexClientProvider";
+import NavbarMenu from "../components/NavbarMenu";
 import "./globals.css";
 
 const roboto = Roboto({
