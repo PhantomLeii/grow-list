@@ -39,7 +39,7 @@ export default function Home() {
               <ItemCard
                 key={list._id}
                 name={list.name}
-                description={list.description || ''}
+                description={list.description || ""}
                 href={`/lists/${list._id}`}
                 isPrivate={list.isPrivate}
               />
@@ -51,7 +51,7 @@ export default function Home() {
   );
 }
 
-export function OnBoarding() {
+function OnBoarding() {
   return (
     <div className="container h-[calc(100vh-80px)] w-full flex flex-col justify-center items-center max-w-4xl">
       <p className="w-full text-lg md:text-center tracking-wide font-light uppercase mb-2">
