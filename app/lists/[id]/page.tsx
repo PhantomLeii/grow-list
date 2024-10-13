@@ -8,6 +8,7 @@ import ItemModalForm from "@/components/ItemModalForm";
 import { Spinner } from "flowbite-react";
 import { Id } from "@/convex/_generated/dataModel";
 import ItemModal from "@/components/ItemModal";
+import DeleteListModal from "@/components/DeleteListModal";
 
 export default function List() {
   const { id }: { id: Id<"lists"> } = useParams();
@@ -24,6 +25,7 @@ export default function List() {
           <p className="text-lg text-gray-500 dark:text-gray-900">
             {list?.description}
           </p>
+          <DeleteListModal id={id} />
         </div>
         <ItemModalForm id={id} />
       </div>

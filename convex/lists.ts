@@ -63,3 +63,20 @@ export const createList = mutation({
     return 201;
   },
 });
+
+export const deleteList = mutation({
+  args: {
+    id: v.id('lists')
+  },
+
+  handler: async (ctx, { id }) => {
+    try {
+      await ctx.db.delete(id);
+    } catch (err) {
+      console.error(err);
+      return 400;
+    }
+
+    return 204;
+  }
+})
